@@ -1,0 +1,142 @@
+{
+	"pages": [
+		// pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "配件申请",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false,
+						"buttons": [{
+							"fontSrc": "/static/iconfont.ttf",
+							"text": "\ue726",
+							"type": "default",
+							"background": "#000000",
+							"fontSize": "24px"
+						}],
+						"align": "center",
+						"paddingRight": "30px"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/trolley/trolley",
+			"style": {
+				"navigationBarTitleText": "配件申请",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/matter/matter",
+			"style": {
+				"navigationBarTitleText": "配件选择",
+				"enablePullDownRefresh": false,
+				"_app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "确认",
+							"type": "default",
+							"background": "#0B49B0",
+							"fontSize": "12px"
+						}],
+						"align": "center",
+						"paddingRight": "30px"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/fitting/fitting",
+			"style": {
+				"navigationBarTitleText": "物料选择",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/fitting-search/fitting-search",
+			"style": {
+				"navigationBarTitleText": "物料搜索",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/order-form/order-form",
+			"style": {
+				"navigationBarTitleText": "确认申请",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/matter-detail/matter-detail",
+			"style": {
+				"navigationBarTitleText": "申请详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/address-form/address-form",
+			"style": {
+				"navigationBarTitleText": "编辑收货地址",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/shippers/shippers",
+			"style": {
+				"navigationBarTitleText": "发货详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/fitting-detail/fitting-detail",
+			"style": {
+				"navigationBarTitleText": "物料详情",
+				"enablePullDownRefresh": false
+			}
+		}
+
+	],
+
+
+	"globalStyle": {
+		"pageOrientation": "portrait",
+		"navigationBarTitleText": "运维",
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#F8F8F8",
+		"backgroundColorTop": "#F4F5F6",
+		"backgroundColorBottom": "#F4F5F6",
+		"mp-360": {
+			"navigationStyle": "custom"
+		},
+		"h5": {
+			"maxWidth": 1190,
+			"navigationBarTextStyle": "black",
+			"navigationBarBackgroundColor": "#F1F1F1"
+
+		}
+
+
+	},
+	"tabBar": {
+		"color": "#000",
+		"selectedColor": "#fff",
+		"borderStyle": "#fff",
+		"backgroundColor": "#fff",
+		"height": "50px",
+		"list": []
+	}
+}
