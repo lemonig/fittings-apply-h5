@@ -71,6 +71,10 @@ const goAddressForm = (id, event) => {
 		url: url
 	});
 };
+
+onShow(() => {
+	fetch();
+});
 </script>
 
 <style lang="scss">

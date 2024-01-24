@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<uni-list>
+		<uni-list v-if="pageData.length">
 			<!-- 显示圆形头像 -->
 			<uni-list-item
 				v-for="(item, index) in pageData"
@@ -12,6 +12,9 @@
 				@click="gotoDetail(item.id)"
 			></uni-list-item>
 		</uni-list>
+		<template v-else>
+			<sd-empty></sd-empty>
+		</template>
 	</view>
 </template>
 

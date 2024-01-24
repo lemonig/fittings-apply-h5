@@ -36,6 +36,7 @@ const getCookie = (cookieName) => {
 
 <style lang="scss">
 @import '@/uni_modules/uni-scss/index.scss';
+@import '@/theme/scolor.scss';
 // @import '@/static/fonts/iconfont-weapp-icon.css';
 /* #ifndef APP-PLUS-NVUE */
 /* uni.css - 通用组件、模板样式库，可以当作一套ui库应用 */

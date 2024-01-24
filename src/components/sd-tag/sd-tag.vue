@@ -9,15 +9,18 @@ import { ref, computed } from 'vue';
 
 const props = defineProps(['color', 'text']);
 
-const tagClass = computed(() => `tag tag-${props.color || 'default'}`);
+const tagClass = computed(() => ` tag-${props.color || 'default'}`);
 </script>
 
 <style lang="scss">
+@import '../../theme/scolor.scss';
 .sd-tag {
 	line-height: 14px;
 	font-size: 12px;
-	font-weight: 200;
-	padding: 4px 7px;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	height: auto;
 	color: #fff;
 	border-radius: 3px;
 	background-color: #8f939c;
@@ -25,13 +28,8 @@ const tagClass = computed(() => `tag tag-${props.color || 'default'}`);
 	border-style: solid;
 	border-color: #8f939c;
 	cursor: pointer;
-}
-.tag {
-	display: inline-block;
-	padding: 4px 8px;
-	border-radius: 4px;
-	font-size: 14px;
-	font-weight: bold;
+	margin-inline-end: 8px;
+	padding-inline: 7px;
 }
 
 .tag-default {
@@ -61,58 +59,68 @@ const tagClass = computed(() => `tag tag-${props.color || 'default'}`);
 }
 
 .tag-magenta {
-	// color: $s-magenta-7;
-	// background: $s-magenta-1;
-	// border-color: $s-magenta-3;
+	color: $sd-magenta-7;
+	background: $sd-magenta-1;
+	border-color: $sd-magenta-3;
 }
 
 .tag-red {
-	background-color: red;
-	color: #fff;
+	color: $sd-magenta-7;
+	background: $sd-magenta-1;
+	border-color: $sd-magenta-3;
 }
 
 .tag-volcano {
-	background-color: #ff4d4f;
-	color: #fff;
+	color: $sd-volcano-7;
+	background: $sd-volcano-1;
+	border-color: $sd-volcano-3;
 }
 
 .tag-orange {
-	background-color: orange;
-	color: #fff;
+	color: $sd-magenta-7;
+	background: $sd-magenta-1;
+	border-color: $sd-magenta-3;
 }
 
 .tag-gold {
-	background-color: gold;
-	color: #fff;
+	color: $sd-gold-7;
+	background: $sd-gold-1;
+	border-color: $sd-gold-3;
 }
 
 .tag-lime {
-	background-color: lime;
-	color: #fff;
+	color: $sd-lime-7;
+	background: $sd-lime-1;
+	border-color: $sd-lime-3;
 }
 
 .tag-green {
-	background-color: green;
-	color: #fff;
+	color: $sd-magenta-7;
+	background: $sd-magenta-1;
+	border-color: $sd-magenta-3;
 }
 
 .tag-cyan {
-	background-color: cyan;
-	color: #fff;
+	color: $sd-cyan-7;
+	background: $sd-cyan-1;
+	border-color: $sd-cyan-3;
 }
 
 .tag-blue {
-	background-color: blue;
-	color: #fff;
+	color: $sd-blue-7;
+	background: $sd-blue-1;
+	border-color: $sd-blue-3;
 }
 
 .tag-geekblue {
-	background-color: #2f54eb;
-	color: #fff;
+	color: $sd-geekblue-7;
+	background: $sd-geekblue-1;
+	border-color: $sd-geekblue-3;
 }
 
 .tag-purple {
-	background-color: purple;
-	color: #fff;
+	color: $sd-purple-7;
+	background: $sd-purple-1;
+	border-color: $sd-purple-3;
 }
 </style>

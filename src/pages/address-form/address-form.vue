@@ -131,6 +131,7 @@ const updateData = async (params) => {
 const getDetail = async (params) => {
 	let res = await getDetailApi(params);
 	Object.assign(formData, res.data);
+	isDefault.value = res.data.isDefault;
 };
 
 // 生命周期钩子

@@ -4,11 +4,12 @@
 			<!-- 基础用法，不包含校验规则 -->
 			<uni-forms :modelValue="formData" ref="formRef" id="formRef" labelWidth="80px" :rules="rules">
 				<uni-forms-item label="物料编码" required name="inventoryCode">
-					<view class="sd-select" @click="gotoFitting">
+					<view class="sd-select" @click="gotoFitting()">
 						<view class="sd-select__input-box">
 							<view v-if="!!formData.inventoryCode" class="sd-select__input-text">{{ formData.inventoryCode }}</view>
 							<view v-else class="sd-select__input-text sd-select__input-placeholder">请选择</view>
-							<uni-icons type="bottom" size="14" style="color: rgb(153, 153, 153)"></uni-icons>
+							<uni-icons v-if="!formData.inventoryCode" type="bottom" size="14" style="color: rgb(153, 153, 153)"></uni-icons>
+							<uni-icons v-else type="clear" size="24" style="color: rgb(192, 196, 204)" @click.stop.prevent="claerFitting($event)"></uni-icons>
 						</view>
 					</view>
 				</uni-forms-item>
@@ -133,7 +134,8 @@ const rules = reactive({
 });
 const mtype = [
 	{ value: '0', text: '配件' },
-	{ value: '1', text: '耗材' }
+	{ value: '1', text: '耗材' },
+	{ value: '2', text: '整机' }
 ];
 
 const utype = [
@@ -215,15 +217,35 @@ const getDetail = async (params) => {
 };
 
 const gotoFitting = () => {
+	console.log('触发');
 	uni.navigateTo({
 		url: `/pages/fitting/fitting`
 	});
+};
+const claerFitting = () => {
+	formData.value = {
+		inventoryCode: '',
+		materialName: '',
+		unitOfMeasure: '',
+		materialType: '',
+		instrumentName: '',
+		instrumentBrandModel: '',
+		quantity: 0,
+		urgencyLevel: '',
+		requisitionType: '',
+		requisitionReason: '',
+		photoList: [],
+		userId: 0
+	};
 };
 
 onShow(() => {
 	uni.$off('UpData');
 	uni.$once('UpData', function (data) {
-		formData.inventoryCode = data;
+		formData.inventoryCode = data.id;
+		formData.materialName = data.name;
+		formData.unitOfMeasure = data.unit;
+		formData.materialType = data.type;
 	});
 });
 

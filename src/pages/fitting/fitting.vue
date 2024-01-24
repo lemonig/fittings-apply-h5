@@ -44,14 +44,14 @@
 						</view> -->
 
 						<view class="row" style="margin-top: 12rpx">
-							<!-- <sd-tag color="success" text="xxx"></sd-tag> -->
-							<uni-tag v-for="(item, index) in item.labelList" :key="index" style="margin-right: 8rpx" :inverted="true" :text="item" type="primary" size="mini" />
+							<sd-tag v-for="(item, index) in item.labelList" :key="index" :color="tagColor[index]" :text="item"></sd-tag>
+							<!-- <uni-tag v-for="(item, index) in item.labelList" :key="index" style="margin-right: 8rpx" :inverted="true" :text="item" type="primary" size="mini" /> -->
 						</view>
 					</view>
 				</template>
 				<template v-slot:footer>
 					<view style="display: flex; align-items: center">
-						<uni-icons type="cart-filled" size="24" color="#f56c6c" @click="chooseFitting(item.inventoryCode, $event)"></uni-icons>
+						<uni-icons type="cart-filled" size="24" color="#f56c6c" @click="chooseFitting(item, $event)"></uni-icons>
 					</view>
 				</template>
 			</uni-list-item>
@@ -89,6 +89,7 @@ const fitOptions = ref([
 		value: '2'
 	}
 ]);
+const tagColor = ref(['green', 'cyan', 'purple', 'magenta', 'pink', 'red']);
 
 const shredData = ref();
 const shredOptions = ref([
@@ -155,9 +156,14 @@ function onNavigationBarButtonTap(e) {
 	});
 }
 
-const chooseFitting = (id) => {
+const chooseFitting = (item) => {
 	event.stopPropagation();
-	uni.$emit('UpData', id);
+	uni.$emit('UpData', {
+		id: item.inventoryCode,
+		name: item.inventoryName,
+		unit: item.unitOfMeasure,
+		type: item.classification.value
+	});
 	uni.navigateBack({
 		delta: 1
 	});
