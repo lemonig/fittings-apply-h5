@@ -3,13 +3,15 @@
 		<view class="example">
 			<!-- 基础用法，不包含校验规则 -->
 			<uni-forms :modelValue="formData" ref="formRef" id="formRef" labelWidth="80px" :rules="rules">
-				<uni-forms-item label="物料编码" required name="inventoryCode">
+				<uni-forms-item label="物料编码" name="inventoryCode">
 					<view class="sd-select" @click="gotoFitting()">
 						<view class="sd-select__input-box">
 							<view v-if="!!formData.inventoryCode" class="sd-select__input-text">{{ formData.inventoryCode }}</view>
 							<view v-else class="sd-select__input-text sd-select__input-placeholder">请选择</view>
 							<uni-icons v-if="!formData.inventoryCode" type="bottom" size="14" style="color: rgb(153, 153, 153)"></uni-icons>
-							<uni-icons v-else type="clear" size="24" style="color: rgb(192, 196, 204)" @click.stop.prevent="claerFitting($event)"></uni-icons>
+							<view v-else @click.stop="claerFitting($event)">
+								<uni-icons type="clear" size="24" style="color: rgb(192, 196, 204)"></uni-icons>
+							</view>
 						</view>
 					</view>
 				</uni-forms-item>
@@ -49,14 +51,14 @@
 		</view>
 
 		<uni-popup ref="messageRef" type="message">
-			<uni-popup-message type="success" :message="messageText" :duration="2000"></uni-popup-message>
+			<uni-popup-message :type="messageType" :message="messageText" :duration="2000"></uni-popup-message>
 		</uni-popup>
 	</view>
 </template>
 
 <script setup>
-import { addRequisitionRawDetails as addApi, getDetail as getDetailApi, updateRequisitionRawDetails as updateApi } from '@/api/index.js';
-import { ref, onMounted, reactive } from 'vue';
+import { addRequisitionRawDetails as addApi, getDetail as getDetailApi, updateRequisitionRawDetails as updateApi, packageAdd as packageAddApi } from '@/api/index.js';
+import { ref, onMounted, reactive, toRefs } from 'vue';
 import { uploadImg } from '@/api/public.js';
 import { compressImage } from '@/common/util.js';
 import { onLoad, onNavigationBarButtonTap, onShow } from '@dcloudio/uni-app';
@@ -80,6 +82,7 @@ const formData = reactive({
 });
 const mid = ref(null);
 const messageText = ref('');
+const messageType = ref('');
 const messageRef = ref(null);
 
 const rules = reactive({
@@ -196,20 +199,71 @@ const addData = async (params) => {
 	messageText.value = res.message;
 	messageRef.value.open();
 	loading.value = false;
-	uni.redirectTo({
-		url: '/pages/trolley/trolley'
-	});
+	if (res.success) {
+		if (res.data.isPackage) {
+			patchFittingTip(res);
+		} else {
+			messageType.value = 'success';
+			goBack();
+		}
+	} else {
+		messageType.value = 'error';
+	}
 };
+
 const modifyData = async (params) => {
 	loading.value = true;
 	let res = await updateApi(params);
 	messageText.value = res.message;
 	messageRef.value.open();
 	loading.value = false;
+	if (res.success) {
+		if (res.data.isPackage) {
+			patchFittingTip(res);
+		} else {
+			messageType.value = 'success';
+			goBack();
+		}
+	} else {
+		messageType.value = 'error';
+	}
+};
+
+const patchFittingTip = (res) => {
+	uni.showModal({
+		title: '提醒',
+		content: `将自动为你选择 ${res.data.packageSubStr} 等附件，如已加入申请请忽略？`,
+		cancelText: '不用',
+		confirmText: '好的',
+		confirmColor: '#E51C23',
+		success: function (res1) {
+			if (res1.confirm) {
+				patchFitting({ packageId: res.data.packageId });
+			} else if (res1.cancel) {
+				goBack();
+			}
+		}
+	});
+};
+
+const patchFitting = async (params) => {
+	let res = await packageAddApi(params);
+	messageText.value = res.message;
+	messageRef.value.open();
+	if (res.success) {
+		messageType.value = 'success';
+		goBack();
+	} else {
+		messageType.value = 'error';
+	}
+};
+
+const goBack = () => {
 	uni.redirectTo({
 		url: '/pages/trolley/trolley'
 	});
 };
+
 const getDetail = async (params) => {
 	let res = await getDetailApi(params);
 	Object.assign(formData, res.data);
@@ -217,26 +271,18 @@ const getDetail = async (params) => {
 };
 
 const gotoFitting = () => {
-	console.log('触发');
 	uni.navigateTo({
 		url: `/pages/fitting/fitting`
 	});
 };
 const claerFitting = () => {
-	formData.value = {
-		inventoryCode: '',
-		materialName: '',
-		unitOfMeasure: '',
-		materialType: '',
-		instrumentName: '',
-		instrumentBrandModel: '',
-		quantity: 0,
-		urgencyLevel: '',
-		requisitionType: '',
-		requisitionReason: '',
-		photoList: [],
-		userId: 0
-	};
+	console.log('触发');
+	const { b, c } = toRefs(formData);
+
+	formData.inventoryCode = '';
+	formData.materialName = '';
+	formData.unitOfMeasure = '';
+	formData.materialType = '';
 };
 
 onShow(() => {

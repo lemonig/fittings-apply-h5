@@ -1,7 +1,11 @@
 <template>
 	<view class="content">
 		<uni-list>
-			<uni-list-item :title="pageData.registrationStatus?.label" :rightText="pageData.deliveryNum" clickable @click="goShipper(pageData.id)"></uni-list-item>
+			<uni-list-item :title="pageData.registrationStatus?.label" clickable @click="goShipper(pageData.id)">
+				<template v-slot:footer>
+					<text style="color: #0f40f5; font-size: 14px; font-weight: bold">{{ pageData.deliveryNum }} 笔</text>
+				</template>
+			</uni-list-item>
 			<uni-list-item title="申请时间" :rightText="pageData.applicationTime"></uni-list-item>
 			<uni-list-item title="审批状态" :rightText="pageData.approvalStatus?.label"></uni-list-item>
 		</uni-list>

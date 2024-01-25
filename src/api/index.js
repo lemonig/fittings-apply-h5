@@ -86,6 +86,14 @@ export function addRequisitionRawDetails(data) {
 		token: operate.isToken()
 	})
 }
+export function packageAdd(data) {
+	return request({
+		url: `/app/api/user/owner/requisitionRawDetails/package/add`,
+		data,
+		method: "POST",
+		token: operate.isToken()
+	})
+}
 // 用户配件领用临时记录删除 
 export function deleteRequisitionRawDetails(data) {
 	return request({
