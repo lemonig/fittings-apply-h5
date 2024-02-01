@@ -61,6 +61,7 @@ import { addRequisitionRawDetails as addApi, getDetail as getDetailApi, updateRe
 import { ref, onMounted, reactive, toRefs } from 'vue';
 import { uploadImg } from '@/api/public.js';
 import { compressImage } from '@/common/util.js';
+import { mtype, utype, rtype } from '@/common/constant.js';
 import { onLoad, onNavigationBarButtonTap, onShow } from '@dcloudio/uni-app';
 
 const loading = ref(false);
@@ -73,7 +74,7 @@ const formData = reactive({
 	materialType: '',
 	instrumentName: '',
 	instrumentBrandModel: '',
-	quantity: 0,
+	quantity: 1,
 	urgencyLevel: '',
 	requisitionType: '',
 	requisitionReason: '',
@@ -135,22 +136,7 @@ const rules = reactive({
 		]
 	}
 });
-const mtype = [
-	{ value: '0', text: '配件' },
-	{ value: '1', text: '耗材' },
-	{ value: '2', text: '整机' }
-];
 
-const utype = [
-	{ value: '0', text: '紧急' },
-	{ value: '1', text: '一般' },
-	{ value: '2', text: '不紧急' }
-];
-
-const rtype = [
-	{ value: '0', text: '备用' },
-	{ value: '1', text: '即时更好' }
-];
 const fetch = async () => {
 	loading.value = true;
 	let res = await getDetailApi();
@@ -324,8 +310,8 @@ onLoad((options) => {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap-reverse;
-	width: 45px;
-	height: 45px;
+	width: 90px;
+	height: 90px;
 	border-radius: 5px;
 	border-color: #eee;
 	border-width: 1px;

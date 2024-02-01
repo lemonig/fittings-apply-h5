@@ -77,8 +77,8 @@ onLoad((options) => {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap-reverse;
-	width: 45px;
-	height: 45px;
+	width: 90px;
+	height: 90px;
 	border-radius: 5px;
 	border-color: #eee;
 	border-width: 1px;

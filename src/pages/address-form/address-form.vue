@@ -45,6 +45,7 @@ import { regionListTree as regionListTreeApi } from '@/api/public.js';
 import { addAddress as addAddressApi, updateAddress as updateAddressApi, getAddress as getDetailApi } from '@/api/address.js';
 import { compressImage } from '@/common/util.js';
 import { onLoad, onNavigationBarButtonTap } from '@dcloudio/uni-app';
+import { mtype, utype, btype, atype } from '@/common/constant.js';
 
 const loading = ref(false);
 const formRef = ref();
@@ -64,14 +65,6 @@ const messageRef = ref(null);
 const isDefault = ref(false);
 const regionTree = ref([]);
 
-const atype = [
-	{ value: '0', text: '寄件地址' },
-	{ value: '1', text: ' 收货地址' }
-];
-const btype = [
-	{ value: '0', text: '运维部（水)' },
-	{ value: '1', text: '运维部（气)' }
-];
 const aid = ref(null);
 
 const defaultChange = function (e) {

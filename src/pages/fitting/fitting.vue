@@ -3,7 +3,7 @@
 		<uni-search-bar clearButton="auto" cancelButton="none" @input="search"></uni-search-bar>
 		<view class="search-bar">
 			<view class="search-bar-item">
-				<uni-data-picker placeholder="请选择" popup-title="配件分类" :localdata="fitOptions" v-model="fitData" @change="bindPickerChange"></uni-data-picker>
+				<uni-data-picker placeholder="请选择" popup-title="配件分类" :localdata="mtype" v-model="fitData" @change="bindPickerChange"></uni-data-picker>
 			</view>
 			<view class="search-bar-item">
 				<uni-data-picker placeholder="请选择" popup-title="核销分类" :localdata="shredOptions" v-model="shredData" @change="bindPickerChange1"></uni-data-picker>
@@ -71,41 +71,16 @@ import { debounce } from '@/common/util.js';
 import SdEmpty from '@/components/sd-empty/sd-empty.vue';
 import { reactive } from 'vue';
 import { onReachBottom } from '@dcloudio/uni-app';
+import { mtype, utype, shredOptions } from '@/common/constant.js';
 
 const loading = ref(false);
 const pageData = ref([]);
 const fitData = ref();
-const fitOptions = ref([
-	{
-		text: '配件',
-		value: '0'
-	},
-	{
-		text: '耗材',
-		value: '1'
-	},
-	{
-		text: '整机',
-		value: '2'
-	}
-]);
+
 const tagColor = ref(['green', 'cyan', 'purple', 'magenta', 'pink', 'red']);
 
 const shredData = ref();
-const shredOptions = ref([
-	{
-		text: '非核销类',
-		value: '0'
-	},
-	{
-		text: '现场核销',
-		value: '1'
-	},
-	{
-		text: '寄回核销',
-		value: '2'
-	}
-]);
+
 const deviceOptions = ref([]);
 const devData = ref();
 
@@ -122,10 +97,11 @@ const getOther = async () => {
 	deviceOptions.value = res.data;
 };
 
-const fetch = async () => {
+const fetch = async (flag) => {
 	if (loading.value === true) {
 		return;
 	}
+	if (flag) pageData.value = [];
 	let params = {
 		page: query.page,
 		size: query.pageSize,
@@ -171,7 +147,7 @@ const chooseFitting = (item) => {
 
 const search = debounce((res) => {
 	keywords.value = res;
-	fetch();
+	fetch(true);
 }, 300);
 
 const gotoDetail = (id) => {
@@ -184,21 +160,21 @@ const bindPickerChange = (e) => {
 	if (!!e.detail.value.length) {
 		fitData.value = e.detail.value[0].value;
 	}
-	fetch();
+	fetch(true);
 };
 
 const bindPickerChange1 = (e) => {
 	if (!!e.detail.value.length) {
 		shredData.value = e.detail.value[0].value;
 	}
-	fetch();
+	fetch(true);
 };
 
 const bindPickerChange2 = (e) => {
 	if (!!e.detail.value.length) {
 		devData.value = e.detail.value[0].value;
 	}
-	fetch();
+	fetch(true);
 };
 
 const handleReachBottom = debounce(function () {
@@ -210,7 +186,7 @@ const handleReachBottom = debounce(function () {
 		return;
 	}
 	query.page++;
-	fetch();
+	fetch(false);
 }, 300);
 
 onReachBottom(
@@ -221,7 +197,7 @@ onReachBottom(
 
 onMounted(() => {
 	getOther();
-	fetch();
+	fetch(false);
 });
 </script>
 
@@ -240,8 +216,8 @@ onMounted(() => {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap-reverse;
-	width: 45px;
-	height: 45px;
+	width: 90px;
+	height: 90px;
 	border-radius: 5px;
 	border-color: #eee;
 	border-width: 1px;
@@ -265,7 +241,7 @@ onMounted(() => {
 	.head {
 		font-size: 16px;
 		color: #3b4144;
-		font-weight: 400;
+		font-weight: bold;
 		overflow: hidden;
 		margin-bottom: 8px;
 	}

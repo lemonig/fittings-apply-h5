@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<uni-list>
-			<uni-list-item direction="row" clickable to @click="chooseAddress">
+			<uni-list-item direction="row" clickable to showArrow @click="chooseAddress">
 				<template v-slot:body>
 					<view class="m-body">
 						<view class="note">
@@ -64,11 +64,11 @@
 						</template>
 						<template v-slot:body>
 							<view class="m-body">
-								<view class="head">{{ item.instrumentName }}</view>
+								<view class="head">{{ item.materialName }}</view>
 								<view class="row">
-									<view>{{ item.quantity }}</view>
-									<view>{{ item.urgencyLevel.label }}</view>
-									<view>{{ item.requisitionType.label }}</view>
+									<view>【数量x{{ item.quantity }}】</view>
+									<view>【{{ item.urgencyLevel.label }}】</view>
+									<view>【{{ item.requisitionType.label }}】</view>
 								</view>
 								<view class="note">
 									{{ item.requisitionReason }}
@@ -95,6 +95,7 @@ import { listRequisitionRawDetails as listRequisitionRawDetailsApi } from '@/api
 import { compressImage } from '@/common/util.js';
 import { onLoad, onNavigationBarButtonTap, onShow } from '@dcloudio/uni-app';
 import { objGet } from '../../uni_modules/uni-forms/components/uni-forms/utils';
+import { stype, btype } from '@/common/constant.js';
 
 const loading = ref(false);
 const pageData = ref([]);
@@ -148,14 +149,6 @@ const rules = reactive({
 const messageText = ref('');
 const messageType = ref('success');
 const messageRef = ref(null);
-const stype = [
-	{ value: '0', text: '邮寄' },
-	{ value: '1', text: '自取' }
-];
-const btype = [
-	{ value: '0', text: '运维部（水' },
-	{ value: '1', text: '运维部（气' }
-];
 
 const fetch = async () => {
 	loading.value = true;
@@ -271,8 +264,8 @@ onLoad((options) => {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap-reverse;
-	width: 45px;
-	height: 45px;
+	width: 90px;
+	height: 90px;
 	border-radius: 5px;
 	border-color: #eee;
 	border-width: 1px;
@@ -296,7 +289,7 @@ onLoad((options) => {
 	.head {
 		font-size: 16px;
 		color: #303133;
-		font-weight: 400;
+		font-weight: bold;
 		overflow: hidden;
 		padding: 4px 0;
 	}

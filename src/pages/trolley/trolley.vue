@@ -19,9 +19,9 @@
 						</template>
 						<template v-slot:body>
 							<view class="m-body">
-								<view class="head">{{ item.instrumentName }}</view>
+								<view class="head">{{ item.materialName }}</view>
 								<view class="row">
-									<view>数量 x {{ item.quantity }}</view>
+									<view>【数量x{{ item.quantity }}】</view>
 									<view>【{{ item.urgencyLevel.label }}】</view>
 									<view>【{{ item.requisitionType.label }}】</view>
 								</view>
@@ -132,8 +132,8 @@ onMounted(() => {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap-reverse;
-	width: 45px;
-	height: 45px;
+	width: 90px;
+	height: 90px;
 	border-radius: 5px;
 	border-color: #eee;
 	border-width: 1px;
@@ -156,7 +156,7 @@ onMounted(() => {
 	.head {
 		font-size: 16px;
 		color: #3b4144;
-		font-weight: 400;
+		font-weight: bold;
 		overflow: hidden;
 	}
 	.row {
