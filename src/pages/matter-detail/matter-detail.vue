@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<uni-list>
-			<uni-list-item :title="pageData.registrationStatus?.label" clickable @click="goShipper(pageData.id)">
+			<uni-list-item title="已发货" clickable @click="goShipper(pageData.id)">
 				<template v-slot:footer>
 					<text style="color: #0f40f5; font-size: 14px; font-weight: bold">{{ pageData.deliveryNum }} 笔</text>
 				</template>
@@ -11,7 +11,7 @@
 		</uni-list>
 
 		<uni-list style="margin-top: 15px">
-			<uni-list-item :title="pageData.shippingFullname" :rightText="pageData.shippingMethod?.label" :note="pageData.shippingFormatAddress"></uni-list-item>
+			<uni-list-item :title="pageData.shippingFullname + '  ' + pageData.shippingPhoneNumber" :note="pageData.shippingFormatAddress"></uni-list-item>
 		</uni-list>
 
 		<uni-list style="margin-top: 15px">
@@ -204,9 +204,6 @@ onLoad((options) => {
 		color: #606266;
 		font-size: 12px;
 		font-weight: 400;
-		view {
-			margin-right: 8px;
-		}
 	}
 	.note {
 		color: #999;

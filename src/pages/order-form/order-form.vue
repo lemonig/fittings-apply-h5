@@ -25,16 +25,30 @@
 				<uni-forms-item label="发货方式" required name="shippingMethod">
 					<uni-data-select v-model="formData.shippingMethod" :localdata="stype" placeholder="请选择"></uni-data-select>
 				</uni-forms-item>
-				<uni-forms-item label="项目编号" required name="projectNumber">
-					<uni-easyinput v-model="formData.projectNumber" placeholder="请输入" />
+
+				<uni-forms-item label="项目编号" name="projectNumber" required>
+					<view class="sd-select" @click="gotoFitting()">
+						<view class="sd-select__input-box">
+							<view v-if="!!formData.projectNumber" class="sd-select__input-text">{{ formData.projectNumber }}</view>
+							<view v-else class="sd-select__input-text sd-select__input-placeholder">请选择</view>
+							<uni-icons v-if="!formData.projectNumber" type="bottom" size="14" style="color: rgb(153, 153, 153)"></uni-icons>
+							<view v-else @click.stop="claerFitting($event)">
+								<uni-icons type="clear" size="24" style="color: rgb(192, 196, 204)"></uni-icons>
+							</view>
+						</view>
+					</view>
 				</uni-forms-item>
+
+				<!-- 				<uni-forms-item label="项目编号" required name="projectNumber">
+					<uni-easyinput v-model="formData.projectNumber" placeholder="请输入" />
+				</uni-forms-item> -->
 
 				<uni-forms-item label="业务归属" required name="businessOwner">
 					<uni-data-select v-model="formData.businessOwner" :localdata="btype" placeholder="请选择"></uni-data-select>
 				</uni-forms-item>
 				<uni-forms-item label="运维地区" required name="maintenanceRegionCode">
 					<uni-data-picker
-						placeholder="请选择班级"
+						placeholder="请选择所在地区"
 						popup-title="请选择所在地区"
 						:localdata="regionTree"
 						:map="{ text: 'label', value: 'key' }"
@@ -231,7 +245,23 @@ onShow(() => {
 	uni.$once('UpData', function (data) {
 		Object.assign(address, data);
 	});
+
+	uni.$off('UpData1');
+	uni.$once('UpData1', function (data) {
+		formData.projectNumber = data.projectNumber;
+	});
 });
+
+const gotoFitting = () => {
+	uni.navigateTo({
+		url: '/pages/fitting-project/fitting-project'
+	});
+};
+const claerFitting = () => {
+	formData.projectNumber = '';
+};
+
+onShow(() => {});
 
 onLoad((options) => {
 	if (options.mid) {
@@ -298,9 +328,6 @@ onLoad((options) => {
 		color: #606266;
 		font-size: 12px;
 		font-weight: 400;
-		view {
-			margin-right: 8px;
-		}
 	}
 	.note {
 		color: #999;

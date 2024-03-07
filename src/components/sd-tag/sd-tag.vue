@@ -26,7 +26,6 @@ const tagClass = computed(() => ` tag-${props.color || 'default'}`);
 	background-color: #8f939c;
 	border-width: 1px;
 	border-style: solid;
-	border-color: #8f939c;
 	cursor: pointer;
 	margin-inline-end: 8px;
 	padding-inline: 7px;

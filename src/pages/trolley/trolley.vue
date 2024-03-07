@@ -14,7 +14,7 @@
 					<uni-list-item direction="row" clickable to @click="goMatter(item.id)">
 						<template v-slot:header>
 							<view class="m-left">
-								<image class="u-img" :src="item.photoList[0]?.url" mode="aspectFit"></image>
+								<sd-img class="u-img" :url="item.photoList[0]?.url" mode="aspectFit"></sd-img>
 							</view>
 						</template>
 						<template v-slot:body>
@@ -49,6 +49,7 @@
 import { listRequisitionRawDetails as listRequisitionRawDetailsApi, deleteRequisitionRawDetails as deleteApi } from '@/api/index.js';
 import { ref, onMounted } from 'vue';
 import SdEmpty from '@/components/sd-empty/sd-empty.vue';
+import SdImg from '@/components/sd-img/sd-img.vue';
 
 const loading = ref(false);
 const pageData = ref([]);
@@ -164,9 +165,6 @@ onMounted(() => {
 		color: #999;
 		font-size: 12px;
 		font-weight: 400;
-		view {
-			margin-right: 8px;
-		}
 	}
 	.note {
 		color: #999;

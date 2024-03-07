@@ -20,7 +20,7 @@
 				</uni-forms-item>
 
 				<uni-forms-item label="详细地址" name="addressLine">
-					<uni-easyinput v-model="formData.addressLine" placeholder="请输入" />
+					<uni-easyinput v-model="formData.addressLine" placeholder="请输入" type="textarea" />
 				</uni-forms-item>
 				<uni-forms-item label="地址类型" name="addressType">
 					<uni-data-select v-model="formData.addressType" :localdata="atype" placeholder="请选择"></uni-data-select>

@@ -1,9 +1,9 @@
 //用户
-let test = '327b152e02b94d67af3d330a753001cb'
+let test = 'db844f47b4224df4a61f5523024c15b8'
 const user = {
 	namespaced: true,
 	state: {
-		token: test,
+		token: '',
 	},
 	mutations: {
 		SET_TOKEN(state, provider) {

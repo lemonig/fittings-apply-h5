@@ -6,6 +6,7 @@
 			"style": {
 				"navigationBarTitleText": "配件申请",
 				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": {
 						"autoBackButton": false,
@@ -16,6 +17,7 @@
 							"background": "#000000",
 							"fontSize": "24px"
 						}],
+
 						"align": "center",
 						"paddingRight": "30px"
 					}
@@ -104,6 +106,21 @@
 			"path": "pages/fitting-detail/fitting-detail",
 			"style": {
 				"navigationBarTitleText": "物料详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/logistics/logistics",
+			"style": {
+				"navigationBarTitleText": "物流信息",
+				"enablePullDownRefresh": false,
+				"transparentTitle": "always "
+			}
+		},
+		{
+			"path": "pages/fitting-project/fitting-project",
+			"style": {
+				"navigationBarTitleText": "项目编号",
 				"enablePullDownRefresh": false
 			}
 		}

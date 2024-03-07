@@ -30,7 +30,7 @@
 					</template>
 				</uni-list-item>
 			</uni-list>
-			<view class="footer" @click="goLogistics(item.id)">
+			<view v-if="item.trackingNumber" class="footer" @click="goLogistics(item)">
 				<button type="default" size="mini">查看物流</button>
 			</view>
 		</uni-section>
@@ -57,7 +57,11 @@ const fetch = async (params) => {
 	}
 };
 
-const goLogistics = (id) => {};
+const goLogistics = (param) => {
+	uni.navigateTo({
+		url: `/pages/logistics/logistics?trackingNumber=${param.trackingNumber}&trackingCompany=${param.trackingCompany}`
+	});
+};
 
 onLoad((options) => {
 	if (options.id) {

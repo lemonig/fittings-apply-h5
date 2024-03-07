@@ -23,7 +23,7 @@
 			<uni-list-item v-for="(item, index) in pageData" :key="index" direction="row" clickable @click="gotoDetail(item.id)">
 				<template v-slot:header>
 					<view class="m-left" v-if="'photoList' in item">
-						<image class="u-img" :src="item.photoList[0]?.url" mode="aspectFit"></image>
+						<sd-img class="u-img" :url="item.photoList[0]?.url" mode="aspectFit"></sd-img>
 					</view>
 				</template>
 				<template v-slot:body>
@@ -72,6 +72,7 @@ import SdEmpty from '@/components/sd-empty/sd-empty.vue';
 import { reactive } from 'vue';
 import { onReachBottom } from '@dcloudio/uni-app';
 import { mtype, utype, shredOptions } from '@/common/constant.js';
+import SdImg from '@/components/sd-img/sd-img.vue';
 
 const loading = ref(false);
 const pageData = ref([]);

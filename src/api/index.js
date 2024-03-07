@@ -139,3 +139,12 @@ export function requisitionGet(data) {
 		token: operate.isToken()
 	})
 }
+// 配件详情
+export function projectSearch(data) {
+	return request({
+		url: `/app/api/common/projectNumber/search`,
+		data,
+		method: "POST",
+		token: operate.isToken()
+	})
+}
